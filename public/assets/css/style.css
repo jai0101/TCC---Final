@@ -2468,3 +2468,11 @@ c0714f28
 .header-nav .profile .dropdown-item:hover {
   background-color: #fffcf7;
 }
+
+.blog .sidebar .search-form form input[type=file] {
+  border: 0;
+  padding: 4px;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+  color: #ecab96;
+}
