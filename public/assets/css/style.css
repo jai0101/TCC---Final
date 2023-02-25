@@ -5922,6 +5922,8 @@ textarea.input1 + .shadow-input1 {
   
     height: 50px;
     width: 50px;
+    border: 1px; 
+    border-color: #7D3617;
   }
 
 
