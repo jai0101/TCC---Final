@@ -148,7 +148,7 @@ async function enviadoacao(req,res) {
         }
         else{
           
-            console.log(req.body.nome)
+            console.log(destinatario.nome)
 
         }
 
