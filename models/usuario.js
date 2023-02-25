@@ -5,10 +5,14 @@ const Schema = mongoose.Schema
 var UsuarioSchema = new Schema({
     nome1:{type:String},
     nome2:{type:String},
-    email: {type:String},
-    senha: {type:String},
+    telephone:{type:String},
+    profissao:{type:String},
+    cidade:{type:String},
+    username:{type:String},
+    password:{type:String},
     foto: {type:String}
 
 })
 
-module.exports = mongoose.model("Usuario", UsuarioSchema)
+const usuario = mongoose.model("Usuario", UsuarioSchema)
+module.exports = usuario

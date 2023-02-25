@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Passaport to Life</title>
+  <meta content="" name="description">
+
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/mundo.png" rel="icon">
+  <link href="assets/img/mundo.png " rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: FlexStart - v1.11.1
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+   <!-- ======= Header ======= -->
+   <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <img src="assets/img/mundo.png" alt="">
+        <span>Passaport to life</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto " href="/">Início</a></li>
+          <li><a class="nav-link scrollto " href="/descricao">Descrição</a></li>
+          <li><a class="nav-link scrollto" href="/conteudo">Conteúdo</a></li>
+          <li><a class="nav-link scrollto" href="/desenvolvedora">Desenvolvedora</a></li>
+          <li><a class="nav-link scrollto" href="/doacao">Doação</a></li>
+
+          <%if(typeof Admin == "undefined"){%>
+            <li><a class="getstarted scrollto" href="/login" class="link-danger" >Login</a></p></li>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+            <title>Meu Perfil</title>
+            <%}%>
+            <%if(typeof Admin !== "undefined"){%>
+            <ul class="header-nav ms-auto">
+              <br class="d-flex align-items-center">
+             
+              <lre3333i class="nav-item dropdown pe-3">
+  
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                  <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                  <span class="d-none d-md-block dropdown-toggle ps-2"><%=Admin.nome1%> <%=Admin.nome2%></span>
+                </a><!-- End Profile Iamge Icon -->
+  
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                  <li class="dropdown-header">
+                    <h6><%=Admin.nome1%> <%=Admin.nome2%></h6>
+                    <span><%=Admin.profissao%></span>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="/perfil">
+                      <i class="bi bi-person"></i>
+                      <span>My Profile</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                      <i class="bi bi-box-arrow-right"></i>
+                      <span>Sign Out</span>
+                    </a>
+                  </li>
+                </ul>              
+              </li>
+                        
+            </ul>
+            <%}%> 
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header>
+  <!-- End Header -->
+  <section style="background-color: #fffaff;">
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-10">
+          <div class="card text-dark">
+            <div class="card-body p-4">
+              <h4 class="mb-0">Pedidos de doação</h4>
+              <p class="fw-light mb-4 pb-2">Mensagens anônimas dos usuários</p>
+  
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
+                  height="60" />
+                <div>
+                  <h6 class="fw-bold mb-1"><%destinatario.nome%></h6>
+                  <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0">
+                     pix:<%destinatario.pix%>
+                      <span class="badge bg-primary">Pending</span>
+                    </p>
+                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                  </div>
+                  <p class="mb-0">
+                 <%destinatario.mensagem%>
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="my-0" />
+  
+            <div class="card-body p-4">
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp" alt="avatar" width="60"
+                  height="60" />
+                <div>
+                  <h6 class="fw-bold mb-1">Lara Stewart</h6>
+                  <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0">
+                      March 15, 2021
+                      <span class="badge bg-success">Approved</span>
+                    </p>
+                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                    <a href="#!" class="text-success"><i class="fas fa-redo-alt ms-2"></i></a>
+                    <a href="#!" class="link-danger"><i class="fas fa-heart ms-2"></i></a>
+                  </div>
+                  <p class="mb-0">
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It
+                    has roots in a piece of classical Latin literature from 45 BC, making it
+                    over 2000 years old. Richard McClintock, a Latin professor at
+                    Hampden-Sydney College in Virginia, looked up one of the more obscure
+                    Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                    the cites.
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="my-0" style="height: 1px;" />
+  
+            <div class="card-body p-4">
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp" alt="avatar" width="60"
+                  height="60" />
+                <div>
+                  <h6 class="fw-bold mb-1">Alexa Bennett</h6>
+                  <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0">
+                      March 24, 2021
+                      <span class="badge bg-danger">Rejected</span>
+                    </p>
+                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                  </div>
+                  <p class="mb-0">
+                    There are many variations of passages of Lorem Ipsum available, but the
+                    majority have suffered alteration in some form, by injected humour, or
+                    randomised words which don't look even slightly believable. If you are
+                    going to use a passage of Lorem Ipsum, you need to be sure.
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="my-0" />
+  
+            <div class="card-body p-4">
+              <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp" alt="avatar" width="60"
+                  height="60" />
+                <div>
+                  <h6 class="fw-bold mb-1">Betty Walker</h6>
+                  <div class="d-flex align-items-center mb-3">
+                    <p class="mb-0">
+                      March 30, 2021
+                      <span class="badge bg-primary">Pending</span>
+                    </p>
+                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                    <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                  </div>
+                  <p class="mb-0">
+                    It uses a dictionary of over 200 Latin words, combined with a handful of
+                    model sentence structures, to generate Lorem Ipsum which looks
+                    reasonable. The generated Lorem Ipsum is therefore always free from
+                    repetition, injected humour, or non-characteristic words etc.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+    

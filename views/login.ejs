@@ -5,12 +5,12 @@
       <meta charset="utf-8">
       <meta content="width=device-width, initial-scale=1.0" name="viewport">
     
-      <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+      <title>Passaport to Life</title>
       <meta content="" name="description">
       <meta content="" name="keywords">
     
-      <link href="assets/img/favicon.png" rel="icon">
-      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+      <link href="assets/img/mundo.png" rel="icon">
+      <link href="assets/img/mundo.png" rel="apple-touch-icon">
     
       <!-- Google Fonts -->
       <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -37,6 +37,73 @@
     </head>
     
     <body>
+      
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <img src="assets/img/mundo.png" alt="">
+        <span>Passaport to life</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto " href="/">Início</a></li>
+          <li><a class="nav-link scrollto " href="/descricao">Descrição</a></li>
+          <li><a class="nav-link scrollto"e49474 href="/conteudo">Conteúdo</a></li>
+          <li><a class="nav-link scrollto" href="/desenvolvedora">Desenvolvedora</a></li>
+          <li><a class="nav-link scrollto" href="/doacao">Doação</a></li>
+          <%if(typeof Admin == "undefined"){%>
+            <li><a class="getstarted scrollto" href="/login" class="link-danger" >Login</a></p></li>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+            <title>Meu Perfil</title>
+            <%}%>
+            <%if(typeof Admin !== "undefined"){%>
+            <ul class="header-nav ms-auto">
+              <br class="d-flex align-items-center">
+             
+              <lre3333i class="nav-item dropdown pe-3">
+  
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                  <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                  <span class="d-none d-md-block dropdown-toggle ps-2"><%=Admin.nome1%> <%=Admin.nome2%></span>
+                </a><!-- End Profile Iamge Icon -->
+  
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                  <li class="dropdown-header">
+                    <h6><%=Admin.nome1%> <%=Admin.nome2%></h6>
+                    <span><%=Admin.profissao%></span>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="/perfil">
+                      <i class="bi bi-person"></i>
+                      <span>My Profile</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                      <i class="bi bi-box-arrow-right"></i>
+                      <span>Sign Out</span>
+                    </a>
+                  </li>
+                </ul>              
+              </li>
+                        
+            </ul>
+            <%}%> 
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header>
+  <!-- End Header -->
+
     
       <main>
   
@@ -50,7 +117,7 @@
                         class="img-fluid" alt="Sample image">
                     </div>
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                      <form>
+                     
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                           <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                           <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -58,11 +125,11 @@
                           </button>
               
                           <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-google"></i>
                           </button>
               
                           <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fab fa-instagram"></i>
                           </button>
                           
                         </div>
@@ -70,46 +137,33 @@
                         <div class="divider d-flex align-items-center my-4">
                           <p class="text-center fw-bold mx-3 mb-0">Or</p>
                         </div>
-              
+
+                      <form method="POST">
                         <!-- Email input -->
-                        <div class="form-outline mb-4">
-                          <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter a valid email address" />
-                          <label class="form-label" for="form3Example3">Email address</label>
-                        </div>
-              
+                       
+                        <input type="username" name="username" class="form-control form-control-lg"
+                            placeholder="Enter a valid email address"
+                            class="form-label"/> 
+                            Email address<br><br>
+                      
                         <!-- Password input -->
-                        <div class="form-outline mb-3">
-                          <input type="password" id="form3Example4" class="form-control form-control-lg"
-                            placeholder="Enter password" />
-                          <label class="form-label" for="form3Example4">Password</label>
-                        </div>
-              
-                        <div class="d-flex justify-content-between align-items-center">
-                          <!-- Checkbox -->
-                          <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label class="form-check-label" for="form2Example3">
-                              Remember me
-                            </label>
-                          </div>
-                          <a href="#!" class="text-body">Forgot password?</a>
-                        </div>
-              
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                          <button type="button" class="btn btn-primary btn-lg"
+                  
+                          <input type="password" name="password" class="form-control form-control-lg"
+                            placeholder="Enter password" required 
+                            class="form-label"/> Password<br><br>
+                        
+                          <button type="submit" value="Entrar" class="btn btn-primary btn-lg"
                             style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+
+                          </form>     
 
                           <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/registrar"
                             
                               class="link-danger" >Register</a> </p>
                               
-                              <a href="/" class= "llogo d-flex align-items-center">
-                                <img src="assets/img/mundo.png" height="50" alt="">
-                              </a>
                            <!-- End Logo -->
                         </div>
-                      </form>
+                     
                     </div>
                   </div>
                 </div>
@@ -127,7 +181,7 @@
                       <i class="fab fa-facebook-f"></i>
                     </a>
                     <a href="#!" class="text-white me-4">
-                      <i class="fab fa-twitter"></i>
+                      <i class="fab fa-instagram"></i>
                     </a>
                     <a href="#!" class="text-white me-4">
                       <i class="fab fa-google"></i>
