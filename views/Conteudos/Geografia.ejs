@@ -1,0 +1,59 @@
+<%- include('../cabecalho') -%>
+
+<section id="portfolio" class="portfolio">
+ <div class="container" data-aos="fade-up">
+  
+      <section style="background-color: #fffcf7;">
+        <div class="section-header">
+            <h2>Portfolio</h2>
+            <p>Geografia</p> 
+           </div> 
+          <div class="row d-flex justify-content-center" style="background-color: #fffcf7;">
+            <div class="col-md-12 col-lg-10" >   
+              <table style="color:#fffcf7">
+               <tr>
+                <th>
+                <div class="card text-dark" style="height: 80px; width: 900px;">
+                <div class="card-body p-4">
+                  <h4 class="mb-0" style="color: #b56e56;  text-align: center;">Material didático disponibilizado
+                pelos usuários</h4> 
+                </th>
+                </tr>
+                <tr>
+                <td>
+                  <br><br>
+                  <div class="d-flex flex-start">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                      src="assets/img/icon_avatar.jpeg" alt="avatar" width="60" 
+                      height="60" />
+                    <div>
+                      
+                      <h6 class="fw-bold mb-1"><%destinatario.nome%></h6>
+                      <div class="d-flex align-items-center mb-3">
+                        <p class="mb-0">
+                         pix:<%destinatario.pix%>
+                          <span class="badge bg-primary">Pending</span>
+                        </p>
+                        <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                        <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                        <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                      </div>
+                      <p class="mb-0">
+                     <%destinatario.mensagem%>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+                <hr class="my-0" />
+              </td>
+            </tr>
+              </table>
+      </section>
+<%- include('../rodape') -%>
+
+
+    

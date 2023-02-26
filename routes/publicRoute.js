@@ -21,7 +21,16 @@ router.get('/listar',publicController.abrirlistar)
 router.get('/del/:id',publicController.deletar)
 router.get('/edit/:id',publicController.editar)
 router.post('/edit/:id', publicController.enviaeditar)
-
+router.get('/geografia',publicController.abreGeografia)
+router.get('/historia',publicController.abreHistoria)
+router.get('/quimica',publicController.abreQuimica)
+router.get('/fisica',publicController.abreFisica)
+router.get('/portugues',publicController.abrePortugues)
+router.get('/matematica',publicController.abreMatematica)
+router.get('/literatura',publicController.abreLiteratura)
+router.get('/biologia',publicController.abreBiologia)
+router.get('/artes',publicController.abreArtes)
+router.get('/filosofia',publicController.abreFilosofia)
 
 
 router.post('/login', passport.authenticate('local', {

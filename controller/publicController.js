@@ -53,6 +53,137 @@ async function abrirlistar(req,res) {
    
 }
 
+async function abreGeografia(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Geografia.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreArtes(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Artes.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreHistoria(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Historia.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreMatematica(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Matematica.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreQuimica(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Quimica.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreFisica(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Fisica.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abrePortugues(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Portugues.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreFilosofia(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Filosofia.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreBiologia(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Biologia.ejs',{destinatario:destinatario})
+
+  
+}
+
+async function abreLiteratura(req,res) {
+    var destinatario = new Destinatario ({
+        nome: req.body.nome,
+        email: req.body.email,
+        pix: req.body.pix,
+        mensagem: req.body.mensagem
+        
+    })
+    res.render('../views/Conteudos/Literatura.ejs',{destinatario:destinatario})
+
+  
+}
+
+
 async function abreregistrar(req,res) {
     res.render('registrar')
   
@@ -180,6 +311,15 @@ module.exports = {
     deletar,
     editar,
     enviaeditar, 
-    enviadoacao
-    
+    enviadoacao,
+    abreGeografia,
+    abreHistoria,
+    abreArtes,
+    abreBiologia,
+    abreQuimica,
+    abrePortugues,
+    abreMatematica,
+    abreLiteratura,
+    abreFilosofia,
+    abreFisica
 }
