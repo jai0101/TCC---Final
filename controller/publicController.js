@@ -29,21 +29,18 @@ async function abreperfil(req,res) {
 }
 
 async function abredoacao(req,res) {
-    res.render('doacao')
+    res.render('doacao', {Admin:req.user})
     
 }
 
 async function mostrarmensagem(req,res) {
-    var destinatario = new Destinatario ({
-        nome: req.body.nome,
-        email: req.body.email,
-        pix: req.body.pix,
-        mensagem: req.body.mensagem
-        
-    })
-    res.render('mensagem',{destinatario:destinatario})
+    
+    const destinatario = await Destinatario.find({}).exec(function(err,docs){
+    res.render('mensagem', {Destinatarios:docs})
+    }) 
+   
 
-  
+
 }
 
 async function abrirlistar(req,res) {
@@ -61,7 +58,7 @@ async function abreGeografia(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Geografia.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Geografia.ejs',{destinatario:destinatario}, {Admin:usuario})
 
   
 }
@@ -74,7 +71,7 @@ async function abreArtes(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Artes.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Artes.ejs',{destinatario:destinatario}, {Admin:req.user})
 
   
 }
@@ -87,7 +84,8 @@ async function abreHistoria(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Historia.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Historia.ejs',{destinatario:destinatario}, 
+    {Admin:req.user})
 
   
 }
@@ -100,7 +98,8 @@ async function abreMatematica(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Matematica.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Matematica.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -113,7 +112,8 @@ async function abreQuimica(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Quimica.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Quimica.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -126,7 +126,8 @@ async function abreFisica(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Fisica.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Fisica.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -139,7 +140,8 @@ async function abrePortugues(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Portugues.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Portugues.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -152,7 +154,8 @@ async function abreFilosofia(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Filosofia.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Filosofia.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -165,7 +168,8 @@ async function abreBiologia(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Biologia.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Biologia.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -178,7 +182,8 @@ async function abreLiteratura(req,res) {
         mensagem: req.body.mensagem
         
     })
-    res.render('../views/Conteudos/Literatura.ejs',{destinatario:destinatario})
+    res.render('../views/Conteudos/Literatura.ejs',{destinatario:destinatario},
+     {Admin:req.user})
 
   
 }
@@ -213,7 +218,7 @@ async function editar(req,res) {
           password: req.body.password
 
           }, function (err,docs){
-            res.redirect('listar')
+            res.redirect('listar', {Admin:usuario})
           }) 
 }
 
@@ -230,7 +235,7 @@ async function deletar(req,res) {
 
 
 async function adicionarconteudo(req,res) {
-    res.render('addconteudo')
+    res.render('addconteudo', {Admin:usuario})
   
 }
 
@@ -279,6 +284,7 @@ async function enviadoacao(req,res) {
         }
         else{
           
+            res.redirect('mensagem');
             console.log(destinatario.nome)
 
         }
@@ -286,7 +292,7 @@ async function enviadoacao(req,res) {
 
     }) 
 
-    res.render('mensagem', {destinatario:destinatario});
+   
 }
 
 async function logar(req, res){

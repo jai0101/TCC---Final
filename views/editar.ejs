@@ -35,18 +35,17 @@
 
             <form method="POST" enctype="multipart/form-data">
               <!-- 2 column grid layout with text inputs for the first and last names -->
-              Id: <input type="text" name="txtId" readonly value="<%=Usuario._id%>">
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="name" name="nome1" class="form-control" />
-                    <label class="form-label" value="<%=Usuario.nome1%>">First name</label>
+                    <input type="name" name="nome1" id="form3Example1" class="form-control" />
+                    <label class="form-label" for="form3Example1">First name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="name" name="nome2" class="form-control" />
-                    <label class="form-label" value="<%=Usuario.nome2%>">Last name</label>
+                    <input type="name" name="nome2" id="form3Example2" class="form-control" />
+                    <label class="form-label" for="form3Example2">Last name</label>
                   </div>
                 </div>
               </div>
@@ -54,39 +53,39 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="telephone" name="telephone"  class="form-control" />
-                    <label class="form-label"  value="<%=Usuario.telephone%>">Telefone</label>
+                    <input type="telephone" name="telephone" id="form3Example1" class="form-control" />
+                    <label class="form-label" for="form3Example1">Telefone</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" name="profissao" class="form-control" />
-                    <label class="form-label"  value="<%=Usuario.profissao%>">Profissão</label>
+                    <input type="text" name="profissao" id="form3Example2" class="form-control" />
+                    <label class="form-label" for="form3Example2">Profissão</label>
                   </div>
                 </div>
               </div> 
 
               <div class="form-outline mb-4">
-                <input type="text" name="cidade"  class="form-control" />
-                <label class="form-label"  value="<%=Usuario.cidade%>">Cidade</label>
+                <input type="text" name="cidade" id="form3Example3" class="form-control" />
+                <label class="form-label" for="form3Example3">Cidade</label>
               </div>
 
                <!-- foto input -->
                <div class="form-outline mb-4">
-                  <input type="file" name="foto" class="form-control" />
-                  <label class="form-label" value="">Foto de Perfil</label>
+                  <input type="file" name="foto" id="form3Example3" class="form-control" />
+                  <label class="form-label" for="form3Example3">Foto de Perfil</label>
                </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="username" name="username" class="form-control" />
-                <label class="form-label" value="<%=Usuario.username%>">Email address</label>
+                <input type="username" name="username" id="form3Example3" class="form-control" />
+                <label class="form-label" for="form3Example3">Email address</label>
               </div>
 
               <!-- Password input -->
              
-                <input type="password" name="password" class="form-control" />
-                <label class="form-label" value="<%=Usuario.password%>">Password</label>
+                <input type="password" name="password" id="form3Example4" class="form-control" />
+                <label class="form-label" for="form3Example4">Password</label>
               </div>
 
               <!-- Checkbox -->
@@ -135,5 +134,4 @@
   <!-- Jumbotron -->
 </section>
 <!-- Section: Design Block -->
-
 <%- include('rodape') -%>
