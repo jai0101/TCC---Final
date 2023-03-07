@@ -10,8 +10,8 @@ var UsuarioSchema = new Schema({
     cidade:{type:String},
     username:{type:String},
     password:{type:String},
-    foto: {type:String}
-
+    foto: {type:String},
+   
 })
 
 const usuario = mongoose.model("Usuario", UsuarioSchema)

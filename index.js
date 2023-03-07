@@ -26,3 +26,7 @@ app.listen('3000', function(){
     console.log('Funcionando na porta 3000')
 })
 
+app.get('/disciplina/:disciplina/foto/:arquivo', (req, res) => {
+    const caminho = path.join(__dirname, 'public', 'assets', 'fotos', req.params.arquivo);
+    res.download(caminho);
+  });

@@ -2428,7 +2428,9 @@ c0714f28
 }
 
 .header-nav .nav-profile img {
-  max-height: 36px;
+  max-height: 50px;
+  max-width: 50px;
+
 }
 
 .header-nav .nav-profile span {
@@ -5971,12 +5973,4 @@ textarea.input1 + .shadow-input1 {
     border-color: #7D3617;
   }
 
-
-
-
-
-
-
-
-
-
+ 
