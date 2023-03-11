@@ -2,7 +2,7 @@ var Usuario = require('../models/usuario')
 var Destinatario = require('../models/destinatario')
 var Avaliador = require('../models/avaliador')
 var Disciplina = require('../models/disciplina')
-
+const path = require('path');
 
 async function abreindex(req,res) {
     res.render('index',{Admin:req.user})
@@ -31,14 +31,21 @@ async function logout(req, res) {
         res.redirect('/login');
       });
 }      
-  
+
+
 async function abreperfil(req,res) {
-    const usuario = await Usuario.findById(req.user.id)
+    const usuario = await Usuario.findById(req.user.id);
+  
     const usu_disciplinas = await Disciplina.find({
-        usuario: req.params.id
-    }) 
-    res.render('perfil', { Admin: usuario, Disciplinas: usu_disciplinas })
-}
+      usuario: req.user.id // Busca as disciplinas que foram adicionadas pelo usuário logado
+    });
+  
+    res.render('perfil', {
+      Admin: usuario,
+      Disciplinas: usu_disciplinas
+    });
+  }
+  
 
 
 async function abredoacao(req,res) {
@@ -79,25 +86,44 @@ async function mostraravaliacao(req,res) {
    
 }*/
 
-async function abrirlistar(req,res) {
-    const usuario = await Usuario.find({}).exec(function(err,docs){
-        if (req.user) {
-            res.render("listar", { Usuarios: docs, Admin: req.user });
-            } else {
-            res.render("listar", { Usuarios: docs });
-            }
 
-    }) 
+
+/* CERTO async function abrirlistar(req, res) {
+  const usuarios = await Usuario.find({}).exec();
+  const conteudosPorUsuario = [];
+
+  for (let usuario of usuarios) {
+    const conteudos = usuario.disciplina.material;
+    conteudosPorUsuario.push(conteudos.length);
+  }
+
+  if (req.user) {
+    res.render("listar", { Usuarios: usuarios, Admin: req.user, quantidadeConteudos: conteudosPorUsuario });
+  } else {
+    res.render("listar", { Usuarios: usuarios, quantidadeConteudos: conteudosPorUsuario });
+  }
+}*/
+
+async function abrirlistar(req, res) {
+  const nomeUsuario = req.query.nome1;
+  const query = { nome1: nomeUsuario };
+  const usuarios = await Usuario.find(query).exec();
+  const conteudosPorUsuario = [];
+
+  for (let usuario of usuarios) {
+    const conteudos = usuario.disciplina.material;
+    conteudosPorUsuario.push(conteudos.length);
+  }
+
+  if (req.user) {
+    res.render("listar", { Usuarios: usuarios, Admin: req.user, quantidadeConteudos: conteudosPorUsuario });
+  } else {
+    res.render("listar", { Usuarios: usuarios, quantidadeConteudos: conteudosPorUsuario });
+  }
 }
 
-/*async function abreDisciplina(req,res) {
-    const disciplinas = await Disciplina.find({
-        conteudo:req.params.disciplina
-    }) 
-    res.render('visualizaconteudo', {Disciplinas:disciplinas, nome:req.params.disciplina, 
-        Admin:req.user})
-  
-}*/
+
+
 
 async function abreDisciplina(req, res) {
     const disciplinas = await Disciplina.find({ conteudo: req.params.disciplina });
@@ -114,8 +140,6 @@ async function abreDisciplina(req, res) {
       Admin: req.user
     });
   }
-  
-
 
 async function abreregistrar(req,res) {
     res.render('registrar')
@@ -126,7 +150,7 @@ async function abreregistrar(req,res) {
 async function editar(req,res) {
     const idbusca = req.params.id 
     const teste =  await Usuario.findOne({_id : idbusca})
-    console.log(teste.nome1)
+    console.log(teste.foto)
 
     
          Usuario.findById(req.params.id, function(err,docs){
@@ -158,7 +182,7 @@ async function editar(req,res) {
 
 }*/
 
-async function perfilunico(req, res) {
+/*async function perfilunico(req, res) {
     try{
     const usuario = await Usuario.findById(req.params.id)
      res.render('perfilunico', { usuario, Admin: req.user });
@@ -167,7 +191,30 @@ async function perfilunico(req, res) {
     console.log(err);
     res.status(500).send('Ocorreu um erro ao buscar o perfil.');
   }
+}*/
+
+async function perfilunico(req, res) {
+  try {
+    const usuario = await Usuario.findById(req.params.id);
+    
+    const usu_disciplinas = await Disciplina.find({
+      usuario: req.params.id // Busca as disciplinas adicionadas pelo usuário cujo perfil está sendo visualizado
+    });
+
+    const num_disciplinas = usu_disciplinas.length;
+
+    res.render('perfilunico', {
+      usuario,
+      Admin: req.user,
+      Disciplinas: usu_disciplinas,
+      num_disciplinas
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Ocorreu um erro ao buscar o perfil.');
+  }
 }
+
 
   async function enviaeditar(req,res) {
      Usuario.findByIdAndUpdate(req.user.id,
@@ -183,12 +230,12 @@ async function perfilunico(req, res) {
 
           }, function (err,docs){
 
-            console.log(req.body.nome1)
+            console.log(req.body.foto)
             res.redirect('/perfil')
           }) 
 }
 
-async function deletar(req,res) {
+/*async function deletar(req,res) {
     Usuario.findByIdAndDelete(req.params.id, function(err) {
       if (err) {
         console.log(err);
@@ -204,10 +251,27 @@ async function deletar(req,res) {
         });
       }
     });
-  }
+  }*/
+
+  async function deletar(req, res) {
+    try {
+    await Usuario.findByIdAndDelete(req.params.id);
+    req.logout(function(err) {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Erro ao fazer logout');
+      } else {
+        res.redirect('/');
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Erro ao excluir usuário');
+    }
+    }    
   
 async function adicionarconteudo(req,res) {
-    res.render('addconteudo')
+    res.render('addconteudo', {Admin:req.user})
   
 }
 
@@ -226,6 +290,8 @@ async function enviaregistrar(req,res) {
     usuario.save(function(err){
         
         if(err){
+            res.redirect('/registrar');
+           
             console.log(err)
 
         }
@@ -240,7 +306,7 @@ async function enviaregistrar(req,res) {
 }
 
 
-async function enviaconteudo(req,res) {
+/*async function enviaconteudo(req,res) {
     var disciplina = new Disciplina ({
         conteudo: req.body.conteudo,
         titulo: req.body.titulo,
@@ -260,7 +326,31 @@ async function enviaconteudo(req,res) {
         }
 
     })
-}
+}*/
+
+async function enviaconteudo(req,res) {
+    var disciplina = new Disciplina({
+      conteudo: req.body.conteudo,
+      titulo: req.body.titulo,
+      material: req.file.filename,
+      usuario: req.user.id // Adiciona o ID do usuário que fez o upload do material
+      
+
+    });
+  
+    disciplina.save(function(err){
+      if(err){
+        console.log(err);
+      }
+      else{
+        res.redirect('/perfil');
+       
+      }
+    });
+  }
+
+  //(`/visualiza/${disciplina.id}`)
+  
 
 async function enviadoacao(req,res) {
     var destinatario = new Destinatario ({

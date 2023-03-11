@@ -22,18 +22,55 @@
             <tr>
               <td>
                 <br>
-                <div class="section-header">
-                  <h2><%=disciplina.titulo%></h2>
-                  <div>
+                <%if(disciplina.material.endsWith('.jpg')||disciplina.material.endsWith('.png')||
+                        disciplina.material.endsWith('.JPG')||disciplina.material.endsWith('.PNG')||
+                        disciplina.material.endsWith('.jfif')||
+                        disciplina.material.endsWith('.webp')){%>
                     <p class="mb-0">
-                        <img src="/assets/fotos/<%=disciplina.material%>" 
-                        style="height: 500px; width: 500px;">
-                      </a>
+                      <div class="section-header">
+                      <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="height:300px; width:300px;">
+                        <div class="portfolio-wrap">
+                          <img src="/assets/fotos/<%=disciplina.material%>"
+                          style="height:300px; width:300px; object-fit:cover;"
+                           class="img-fluid" alt="">
+                          <div class="portfolio-info">
+                            <h4><%=disciplina.titulo%></h4>
+                            <div class="portfolio-links">
+                              <a href="/assets/fotos/<%=disciplina.material%>" 
+                                class="portfokio-lightbox"><i
+                                  class="bi bi-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
                     </p>
-                      <p class="mb-0">
-                   <a href="/assets/fotos/<%=disciplina.material%>"
-                   download>Baixar material didático</a>
-                   </p>
+                      <%}else{%>
+                        <p class="mb-0">
+                          <div class="section-header">
+                          <div class="col-lg-4 col-md-6 portfolio-item filter-app" 
+                          style="height:300px; width:300px;">
+                            <div class="portfolio-wrap">
+                              <img src="/assets/img/logo.png" 
+                              style="height:300px; width:300px; object-fit:cover;"
+                              class="img-fluid" alt="">
+                              <div class="portfolio-info" >
+                                <h4><%=disciplina.titulo%></h4>
+                                <div class="portfolio-links">
+                                  <a href="/assets/fotos/<%=disciplina.material%>" 
+                                     class="portfokio-lightbox"><i
+                                      class="bi bi-plus"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </p>
+                          <%}%>
+                          <a href="/assets/fotos/<%=disciplina.material%>" class="section-header" alt="image 1" class="w-100 rounded-3">
+                            <h2 class="text-start">Baixar Material</h2>
+                          </a>
+                         
                   </div>
                 </div>
               </td>

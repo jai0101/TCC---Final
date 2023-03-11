@@ -8,7 +8,7 @@ var UsuarioSchema = new Schema({
     telephone:{type:String},
     profissao:{type:String},
     cidade:{type:String},
-    username:{type:String},
+    username:{type:String, unique: true},
     password:{type:String},
     foto: {type:String},
    

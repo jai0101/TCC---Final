@@ -7,9 +7,10 @@
           <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                <img src="/assets/fotos/<%= usuario.foto %>"
+                <img src="/assets/fotos/<%= usuario.foto %>" 
                 class="img-fluid img-thumbnail mt-4 mb-2" 
-                style="max-width: 150px; max-height: 150px; z-index: 1">
+                style="max-width: 180px; max-height: 270.02;border-radius: 10px; z-index: 1; 
+                 object-position: center;">
             </div>
           
               <div class="ms-3" style="margin-top: 130px;">
@@ -22,8 +23,8 @@
             <div class="p-4 text-black" style="background-color: #f8f9fa;"> 
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
-                  <p class="mb-1 h5">253</p>
-                  <p class="small text-muted mb-0">Photos</p>
+                  <p class="mb-1 h5"><%= num_disciplinas %></p>
+                  <p class="small text-muted mb-0">Conteúdos</p>
                   <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </div>
               </div>
@@ -38,19 +39,42 @@
               </div>
               <div class="card-body p-4 text-black" class="mb-5">
                 <p class="lead fw-normal mb-1">Recentes</p>
-              </div>
-              <div class="row g-2">
-                <div class="col mb-2">
-                  <img src="assets/fotos/<%=usuario.foto%>"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                <table style="color:#fffcf7">
+                  <tr>
+                    <th>
   
-<%- include('rodape') -%>
- 
+                      <!--<p class="mb-0"><a href="" class="text-muted">Show all</a></p>-->
+                    </th>
+                  </tr>
+                  <ul>
+                    <li>
+                      <% Disciplinas.forEach(function(disciplina) { %>
+                    <li>
+                      <br>
+                      <div class="row g-2">
+                        <div class="col mb-2">
+                          <h2><%= disciplina.conteudo%></h2>
+                          <p><%=disciplina.titulo%></p>
+                          <%if(disciplina.material.endsWith('.jpg')||disciplina.material.endsWith('.png')||
+                          disciplina.material.endsWith('.JPG')||disciplina.material.endsWith('.PNG')||
+                          disciplina.material.endsWith('.jfif')){%>
+                            <img src="/assets/fotos/<%=disciplina.material%>" style="height:100px; width:100px;
+                          object-fit:cover;">
+                            <%}else{%>
+                            <img src="/assets/img/logo.png" height="100px" width="100"
+                            object-fit="cover">
+                            <%}%>
+                            <a href="/assets/fotos/<%=disciplina.material%>" alt="image 1" class="w-100 rounded-3">Baixar
+                            material</a>
+                        </div>
+                      </div>
+                    </li>
+                    <%})%>
+                  </ul>
+              </div>
+              </th>
+              </tr>
+              </table>
+    </section>
+  
+    <%- include('rodape') -%>
