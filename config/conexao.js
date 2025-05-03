@@ -1,8 +1,21 @@
-const mongoose = require('mongoose')
-const uri = "mongodb://localhost:27017/apnp"
+require('dotenv').config(); // Carrega as variáveis do .env
 
-mongoose.connect(uri);
+const mongoose = require('mongoose');
 
-//mongoose.connect(uri, { useNewUrlParse: true, useUnifiedTopology: true })
+// Aqui, acessamos a variável MONGO_URI que está no .env
+const uri = process.env.MONGO_URI;
 
-module.exports = mongoose
+if (!uri) {
+    console.error('Erro: A variável de ambiente MONGO_URI não está definida.');
+    process.exit(1); // Se a variável não existir, o processo é interrompido
+}
+
+mongoose.connect(uri)
+    .then(() => {
+        console.log('Conectado ao MongoDB');
+    })
+    .catch((error) => {
+        console.error('Erro na conexão:', error);
+    });
+
+module.exports = mongoose;
