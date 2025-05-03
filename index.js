@@ -1,54 +1,44 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const passport = require('passport')
-const Usuario = require('./models/usuario')
-const Disciplina = require('./models/disciplina');
-var session = require('express-session')
+const express = require("express");
+const app = express();
+const path = require("path");
+const session = require("express-session");
+const passport = require("./config/passport");
 
+const Usuario = require("./models/usuario");
+const Disciplina = require("./models/disciplina");
+
+const conexao = require("./config/conexao");
+const publicRoute = require("./routes/publicRoute");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
-    secret: 'keyboard cat',
+    secret: "nodejs",
     resave: false,
-    saveUninitialized: true,
-    })
-)
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(passport.authenticate('session'));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.set('view engine','ejs')
-app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname,'public')))
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-const publicRouter = require('./routes/publicRoute')
+app.use("/", publicRoute);
 
-app.use('/',publicRouter)
-
-app.listen('3000', function(){
-    console.log('Funcionando na porta 3000')
-})
-
-app.get('/disciplina/:disciplina/foto/:arquivo', (req, res) => {
-    const caminho = path.join(__dirname, 'public', 'assets', 'fotos', req.params.arquivo);
+app.get("/disciplina/:disciplina/foto/:arquivo", (req, res) => {
+    const caminho = path.join(__dirname, "public", "imagem", req.params.arquivo);
     res.download(caminho);
-  });
+});
 
-  app.get('/listar', async function(req, res) {
-    const usuarios = await Usuario.find({}).exec();
-  
-    const conteudosPorUsuario = [];
-  
-    for (let usuario of usuarios) {
-      const conteudos = await Disciplina.find({ usuario: usuario._id }).exec();
-      conteudosPorUsuario.push(conteudos.length);
-    }
-  
-    if (req.user) {
-      res.render("listar", { Usuarios: usuarios, Admin: req.user, quantidadeConteudos: conteudosPorUsuario });
-    } else {
-      res.render("listar", { Usuarios: usuarios, quantidadeConteudos: conteudosPorUsuario });
-    }
-  });
+app.get("/listar", async (req, res) => {
+    const usuarios = await Usuario.find();
+    const disciplinas = await Disciplina.find().populate("usuario");
+    res.render("listar", { usuarios, disciplinas });
+});
 
- 
-
-
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor rodando na porta ${PORT}`);
+});

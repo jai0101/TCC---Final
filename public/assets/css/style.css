@@ -2640,7 +2640,7 @@ iframe {
 }
 
 .container-contact1 {
-  width: 1163px;
+  width: 1300px;
   background: #fffcf7;
   border-radius: 10px;
   overflow: hidden;
@@ -5364,7 +5364,7 @@ textarea.input1 + .shadow-input1 {
 
 .img-fluid .img-thumbnail .mt-4 .mb-2{
   height: 100px;
-
+  max-width: 105%;
 
 }
 
