@@ -12,35 +12,12 @@
 
                 </form>
                 <!-- Adiciona a imagem de perfil do usuário -->
-
-                <div class="flex-shrink-0">
-                  <img src="/assets/fotos/<%=Admin.foto%>"
-                  alt="Generic placeholder image" class=".img-fluid .img-thumbnail mt-4 mb-2" id="exifviewer-img-1" 
-                  exifid="1572404890" 
-                
-                    style="width: 140px; border-radius: 10px; height: 210.02px; object-fit: cover; z-index: 1 padding: .25rem;
-                    background-color: #fff; padding: .25rem; border: 1px solid;" >
-                </div>
-                
-
-               <!-- <img src="assets/fotos/<%=Admin.foto%>" alt="Generic placeholder image" 
+                <img src="assets/fotos/<%=Admin.foto%>" alt="Generic placeholder image" 
                  id="exifviewer-img-1" 
-                exifid="1572404890" 
-                class="img-fluid"   class="img-fluid img-thumbnail mt-4 mb-2"
-                style="width: 150px; border-radius: 10px; height: 260.02px; object-fit: cover; z-index: 1 padding: .25rem;
-                background-color: #fff; padding: .25rem; border: 1px solid;" />-->
+                exifid="1572404890"  class="img-fluid img-thumbnail mt-4 mb-2"
+                  style="max-width: 150px; max-height: 212px; border-radius: 10px; z-index: 1; 
+                  object-position: center;" />
 
-                <!--<div class="flex-shrink-0">
-                <img src="/assets/fotos/<%=Admin.foto%>"
-                alt="Generic placeholder image" class="img-fluid" class=".img-fluid .img-thumbnail mt-4 mb-2" id="exifviewer-img-1" 
-                exifid="1572404890" 
-                oldsrc="/assets/fotos/<%=Admin.foto%>"
-                style="width: 150px; border-radius: 10px; height: 260.02px; object-fit: cover; z-index: 1 padding: .25rem;
-                background-color: #fff; padding: .25rem; border: 1px solid;" >
-              </div>
-            </div>-->
-
-      
                 <a href="/edit/<%=Admin._id%>" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                   style="z-index: 1;">
                   Editar
@@ -59,7 +36,7 @@
               </div>
             </div>
 
-            <div class="p-4 text-black" style=>
+            <div class="p-4 text-black" style="background-color: #f8f9fa;">
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
                   <p class="mb-1 h5"><%= Disciplinas.length %></p>

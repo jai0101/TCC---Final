@@ -5,23 +5,19 @@ var Disciplina = require('../models/disciplina')
 const path = require('path');
 
 async function abreindex(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('index',{Admin:admin})
+    res.render('index',{Admin:req.user})
 }
 
 async function abredescricao(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('descricao',{Admin:admin})
+    res.render('descricao',{Admin:req.user})
 }
 
 async function abreconteudo(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('conteudo',{Admin:admin})
+    res.render('conteudo',{Admin:req.user})
 }
 
 async function abredesenvolvedora(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('desenvolvedora',{Admin:admin})
+    res.render('desenvolvedora',{Admin:req.user})
 }
 
 async function abrelogin(req,res) {
@@ -53,22 +49,19 @@ async function abreperfil(req,res) {
 
 
 async function abredoacao(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('doacao', {Admin:admin})
+    res.render('doacao', {Admin:req.user})
     
 }
 
 async function abreavaliacao(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('avaliar', {Admin:admin})
+    res.render('avaliar', {Admin:req.user})
     
 }
 
 async function mostrarmensagem(req, res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
     const destinatario = await Destinatario.find({}).exec(function (err, docs) {
-    if (admin) {
-    res.render("mensagem", { Destinatarios: docs, Admin: admin });
+    if (req.user) {
+    res.render("mensagem", { Destinatarios: docs, Admin: req.user });
     } else {
     res.render("mensagem", { Destinatarios: docs });
     }
@@ -76,10 +69,10 @@ async function mostrarmensagem(req, res) {
 }
 
 async function mostraravaliacao(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
+    
      const avaliador = await Avaliador.find({}).exec(function (err, docs) {
-    if (admin) {
-    res.render("avaliacoes", { Avaliacoes: docs, Admin: admin });
+    if (req.user) {
+    res.render("avaliacoes", { Avaliacoes: docs, Admin: req.user });
     } else {
     res.render("avaliacoes", { Avaliacoes: docs });
     }
@@ -113,7 +106,6 @@ async function mostraravaliacao(req,res) {
 
 async function abrirlistar(req, res) {
   const nomeUsuario = req.query.nome1;
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
   const query = { nome1: nomeUsuario };
   const usuarios = await Usuario.find(query).exec();
   const conteudosPorUsuario = [];
@@ -123,8 +115,8 @@ async function abrirlistar(req, res) {
     conteudosPorUsuario.push(conteudos.length);
   }
 
-  if (admin) {
-    res.render("listar", { Usuarios: usuarios, Admin: admin, quantidadeConteudos: conteudosPorUsuario });
+  if (req.user) {
+    res.render("listar", { Usuarios: usuarios, Admin: req.user, quantidadeConteudos: conteudosPorUsuario });
   } else {
     res.render("listar", { Usuarios: usuarios, quantidadeConteudos: conteudosPorUsuario });
   }
@@ -134,7 +126,6 @@ async function abrirlistar(req, res) {
 
 
 async function abreDisciplina(req, res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
     const disciplinas = await Disciplina.find({ conteudo: req.params.disciplina });
     
     // Adiciona o caminho relativo do arquivo de material didático a cada disciplina
@@ -146,7 +137,7 @@ async function abreDisciplina(req, res) {
     res.render('visualizaconteudo', {
       Disciplinas: disciplinas,
       nome: req.params.disciplina,
-      Admin: admin
+      Admin: req.user
     });
   }
 
@@ -160,14 +151,14 @@ async function editar(req,res) {
     const idbusca = req.params.id 
     const teste =  await Usuario.findOne({_id : idbusca})
     console.log(teste.foto)
-    const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
+
     
          Usuario.findById(req.params.id, function(err,docs){
         if(err) {
             console.log(err)
         } else {
             console.log(docs)
-            res.render('editar',{Usuario: docs, Admin:admin})
+            res.render('editar',{Usuario: docs})
         }
     
   })
@@ -205,7 +196,7 @@ async function editar(req,res) {
 async function perfilunico(req, res) {
   try {
     const usuario = await Usuario.findById(req.params.id);
-    const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
+    
     const usu_disciplinas = await Disciplina.find({
       usuario: req.params.id // Busca as disciplinas adicionadas pelo usuário cujo perfil está sendo visualizado
     });
@@ -214,7 +205,7 @@ async function perfilunico(req, res) {
 
     res.render('perfilunico', {
       usuario,
-      Admin: admin,
+      Admin: req.user,
       Disciplinas: usu_disciplinas,
       num_disciplinas
     });
@@ -225,7 +216,7 @@ async function perfilunico(req, res) {
 }
 
 
- async function enviaeditar(req,res) {
+  async function enviaeditar(req,res) {
      Usuario.findByIdAndUpdate(req.user.id,
          {
           nome1: req.body.nome1,
@@ -243,7 +234,6 @@ async function perfilunico(req, res) {
             res.redirect('/perfil')
           }) 
 }
-
 
 /*async function deletar(req,res) {
     Usuario.findByIdAndDelete(req.params.id, function(err) {
@@ -281,8 +271,7 @@ async function perfilunico(req, res) {
     }    
   
 async function adicionarconteudo(req,res) {
-  const admin = req.user ? await Usuario.findById(req.user.id) : undefined;
-    res.render('addconteudo', {Admin:admin})
+    res.render('addconteudo', {Admin:req.user})
   
 }
 
