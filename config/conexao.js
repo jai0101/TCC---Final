@@ -1,23 +1,23 @@
-require('dotenv').config(); // Carrega as variáveis do .env
+// config/conexao.js
+
+require('dotenv').config();  // Carregar as variáveis do arquivo .env
 
 const mongoose = require('mongoose');
 
-// Define a opção para lidar com avisos futuros do Mongoose
-mongoose.set('strictQuery', true);
-
-// Pega a URI do MongoDB do .env
+// Acessando a variável MONGO_URI do arquivo .env
 const uri = process.env.MONGO_URI;
 
-// Verifica se a URI está definida
 if (!uri) {
     console.error('❌ Erro: A variável de ambiente MONGO_URI não está definida.');
-    process.exit(1);
+    process.exit(1); // Se não tiver a variável, para o servidor
 }
 
-// Conecta ao MongoDB
 mongoose.connect(uri)
     .then(() => {
-        console.log('✅ Conectado ao MongoDB com sucesso!');
+        console.log('Conectado ao MongoDB');
     })
     .catch((error) => {
-        console.error('❌ Erro na conexã
+        console.error('Erro na conexão:', error);
+    });
+
+module.exports = mongoose;
