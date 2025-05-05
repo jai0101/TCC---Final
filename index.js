@@ -1,56 +1,48 @@
-require('dotenv').config();
 const express = require('express');
-const app = express();
-const path = require('path');
-const passport = require('passport');
-const Usuario = require('./models/usuario');
-const Disciplina = require('./models/disciplina');
+const mongoose = require('mongoose');
 const session = require('express-session');
+const passport = require('passport');
+const dotenv = require('dotenv');
+const path = require('path');
+const publicRoute = require('./routes/publicRoute');
 
+// Carregar variáveis do .env
+dotenv.config();
+
+const app = express();
+
+// Middleware e configurações
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Sessão
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
+  secret: 'segredo123',
+  resave: false,
+  saveUninitialized: false
 }));
 
-app.use(passport.authenticate('session'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+// Rotas
+app.use('/', publicRoute);
 
-const publicRouter = require('./routes/publicRoute');
-app.use('/', publicRouter);
+// Conexão com MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log('Conectado ao MongoDB');
 
-// Rota para download de fotos
-app.get('/disciplina/:disciplina/foto/:arquivo', (req, res) => {
-    const caminho = path.join(__dirname, 'public', 'assets', 'fotos', req.params.arquivo);
-    res.download(caminho);
-});
-
-// Rota para listar usuários e disciplinas
-app.get('/listar', async function(req, res) {
-    const usuarios = await Usuario.find({}).exec();
-    const conteudosPorUsuario = [];
-
-    for (let usuario of usuarios) {
-        const conteudos = await Disciplina.find({ usuario: usuario._id }).exec();
-        conteudosPorUsuario.push(conteudos.length);
-    }
-
-    if (req.user) {
-        res.render("listar", { Usuarios: usuarios, Admin: req.user, quantidadeConteudos: conteudosPorUsuario });
-    } else {
-        res.render("listar", { Usuarios: usuarios, quantidadeConteudos: conteudosPorUsuario });
-    }
-});
-
-// ✅ Porta dinâmica exigida pelo Render
-const port = process.env.PORT || 3000;
-app.listen(port, function () {
-    console.log(`Servidor rodando na porta ${port}`);
-});
-
- 
-
-
+  // Iniciar servidor na porta dinâmica do Render
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
+})
+.catch(err => console.error('Erro ao conectar no MongoDB:', err));
